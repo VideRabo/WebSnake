@@ -79,8 +79,8 @@ const Game: React.FC = () => {
   const moveSnake = useCallback(() => {
   if (!isGameActive || gameOver) return;
 
-  let newSnake1 = [...snake];
-  let newSnake2 = [...snake2];
+  const newSnake1 = [...snake];
+  const newSnake2 = [...snake2];
   let eaten = false;
 
   // Move player 1
@@ -96,7 +96,7 @@ const Game: React.FC = () => {
     return;
   }
   // Self-collision player 1
-  for (let segment of newSnake1) {
+  for (const segment of newSnake1) {
     if (head1.x === segment.x && head1.y === segment.y) {
       setGameOver(true);
       setIsGameActive(false);
@@ -105,7 +105,7 @@ const Game: React.FC = () => {
   }
   // Collision with player 2
   if (twoPlayer) {
-    for (let segment of newSnake2) {
+    for (const segment of newSnake2) {
       if (head1.x === segment.x && head1.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
@@ -134,7 +134,7 @@ const Game: React.FC = () => {
       return;
     }
     // Self-collision player 2
-    for (let segment of newSnake2) {
+    for (const segment of newSnake2) {
       if (head2.x === segment.x && head2.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
@@ -142,7 +142,7 @@ const Game: React.FC = () => {
       }
     }
     // Collision with player 1
-    for (let segment of newSnake1) {
+    for (const segment of newSnake1) {
       if (head2.x === segment.x && head2.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
