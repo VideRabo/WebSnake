@@ -76,16 +76,20 @@ const Game: React.FC = () => {
       if (player1Alive) {
         switch (e.key) {
           case 'ArrowUp':
-            if (direction.y === 0) setDirection({ x: 0, y: -1 });
+            // Only allow if not currently moving down (prevent reversal)
+          if (direction.y !== 1) setDirection({ x: 0, y: -1 });
             break;
           case 'ArrowDown':
-            if (direction.y === 0) setDirection({ x: 0, y: 1 });
+            // Only allow if not currently moving up (prevent reversal)
+          if (direction.y !== -1) setDirection({ x: 0, y: 1 });
             break;
           case 'ArrowLeft':
-            if (direction.x === 0) setDirection({ x: -1, y: 0 });
+            // Only allow if not currently moving right (prevent reversal)
+          if (direction.x !== 1) setDirection({ x: -1, y: 0 });
             break;
           case 'ArrowRight':
-            if (direction.x === 0) setDirection({ x: 1, y: 0 });
+            // Only allow if not currently moving left (prevent reversal)
+          if (direction.x !== -1) setDirection({ x: 1, y: 0 });
             break;
         }
       }
@@ -94,16 +98,20 @@ const Game: React.FC = () => {
         const k = e.key.toLowerCase();
         switch (k) {
           case 'w':
-            if (direction2.y === 0) setDirection2({ x: 0, y: -1 });
+            // Only allow if not currently moving down (prevent reversal)
+            if (direction2.y !== 1) setDirection2({ x: 0, y: -1 });
             break;
           case 's':
-            if (direction2.y === 0) setDirection2({ x: 0, y: 1 });
+            // Only allow if not currently moving up (prevent reversal)
+            if (direction2.y !== -1) setDirection2({ x: 0, y: 1 });
             break;
           case 'a':
-            if (direction2.x === 0) setDirection2({ x: -1, y: 0 });
+            // Only allow if not currently moving right (prevent reversal)
+            if (direction2.x !== 1) setDirection2({ x: -1, y: 0 });
             break;
           case 'd':
-            if (direction2.x === 0) setDirection2({ x: 1, y: 0 });
+            // Only allow if not currently moving left (prevent reversal)
+            if (direction2.x !== -1) setDirection2({ x: 1, y: 0 });
             break;
         }
       }
