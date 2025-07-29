@@ -42,16 +42,20 @@ const Game: React.FC = () => {
       // Player 1 controls (arrow keys)
       switch (e.key) {
         case 'ArrowUp':
-          if (direction.y === 0) setDirection({ x: 0, y: -1 });
+          // Only allow if not currently moving down (prevent reversal)
+          if (direction.y !== 1) setDirection({ x: 0, y: -1 });
           break;
         case 'ArrowDown':
-          if (direction.y === 0) setDirection({ x: 0, y: 1 });
+          // Only allow if not currently moving up (prevent reversal)
+          if (direction.y !== -1) setDirection({ x: 0, y: 1 });
           break;
         case 'ArrowLeft':
-          if (direction.x === 0) setDirection({ x: -1, y: 0 });
+          // Only allow if not currently moving right (prevent reversal)
+          if (direction.x !== 1) setDirection({ x: -1, y: 0 });
           break;
         case 'ArrowRight':
-          if (direction.x === 0) setDirection({ x: 1, y: 0 });
+          // Only allow if not currently moving left (prevent reversal)
+          if (direction.x !== -1) setDirection({ x: 1, y: 0 });
           break;
       }
       // Player 2 controls (WASD)
@@ -59,16 +63,20 @@ const Game: React.FC = () => {
         const k = e.key.toLowerCase();
         switch (k) {
           case 'w':
-            if (direction2.y === 0) setDirection2({ x: 0, y: -1 });
+            // Only allow if not currently moving down (prevent reversal)
+            if (direction2.y !== 1) setDirection2({ x: 0, y: -1 });
             break;
           case 's':
-            if (direction2.y === 0) setDirection2({ x: 0, y: 1 });
+            // Only allow if not currently moving up (prevent reversal)
+            if (direction2.y !== -1) setDirection2({ x: 0, y: 1 });
             break;
           case 'a':
-            if (direction2.x === 0) setDirection2({ x: -1, y: 0 });
+            // Only allow if not currently moving right (prevent reversal)
+            if (direction2.x !== 1) setDirection2({ x: -1, y: 0 });
             break;
           case 'd':
-            if (direction2.x === 0) setDirection2({ x: 1, y: 0 });
+            // Only allow if not currently moving left (prevent reversal)
+            if (direction2.x !== -1) setDirection2({ x: 1, y: 0 });
             break;
         }
       }
@@ -79,8 +87,8 @@ const Game: React.FC = () => {
   const moveSnake = useCallback(() => {
   if (!isGameActive || gameOver) return;
 
-  let newSnake1 = [...snake];
-  let newSnake2 = [...snake2];
+  const newSnake1 = [...snake];
+  const newSnake2 = [...snake2];
   let eaten = false;
 
   // Move player 1
@@ -96,7 +104,7 @@ const Game: React.FC = () => {
     return;
   }
   // Self-collision player 1
-  for (let segment of newSnake1) {
+  for (const segment of newSnake1) {
     if (head1.x === segment.x && head1.y === segment.y) {
       setGameOver(true);
       setIsGameActive(false);
@@ -105,7 +113,7 @@ const Game: React.FC = () => {
   }
   // Collision with player 2
   if (twoPlayer) {
-    for (let segment of newSnake2) {
+    for (const segment of newSnake2) {
       if (head1.x === segment.x && head1.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
@@ -134,7 +142,7 @@ const Game: React.FC = () => {
       return;
     }
     // Self-collision player 2
-    for (let segment of newSnake2) {
+    for (const segment of newSnake2) {
       if (head2.x === segment.x && head2.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
@@ -142,7 +150,7 @@ const Game: React.FC = () => {
       }
     }
     // Collision with player 1
-    for (let segment of newSnake1) {
+    for (const segment of newSnake1) {
       if (head2.x === segment.x && head2.y === segment.y) {
         setGameOver(true);
         setIsGameActive(false);
